@@ -114,9 +114,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ConfirmMailTemplate.html" />
+    <EmbeddedResource Include="Resources\ConfirmMailTemplate.html" />
     <Content Include="Resources\Affiliation_icon.ico" />
-    <Content Include="Resources\ErrorMailTemplate.html" />
+    <EmbeddedResource Include="Resources\ErrorMailTemplate.html" />
     <Content Include="Resources\main-logo.png" />
     <None Include="Resources\main-logo1.png" />
   </ItemGroup>

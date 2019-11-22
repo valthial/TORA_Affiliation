@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
@@ -9,7 +8,7 @@ namespace TORA_Affiliation.Controllers.Mail
 {
     class ConfirmMailBuilder
     {
-        public string GetMailBody(IList<string> confirmations)
+        public string GetMailBody(string sendMessage)
         {
             string mailTemplate;
             var assembly = Assembly.GetExecutingAssembly();
@@ -28,17 +27,10 @@ namespace TORA_Affiliation.Controllers.Mail
 
             string htmlConfirmations = string.Empty;
 
-            if (confirmations != null)
-            {
+            htmlConfirmations +=
+                $"<h3 style='text - align:left; font - family:Helvetica,Arial,sans - serif; font - size:15px; margin - bottom:0; color:#5F5F5F;line-height:135%'>{sendMessage}</h3>";
+            htmlConfirmations += "<div><br /></div>";
 
-                foreach (var confirmation in confirmations)
-                {
-                    htmlConfirmations +=
-                        $"<h3 style='text - align:left; font - family:Helvetica,Arial,sans - serif; font - size:15px; margin - bottom:0; color:#5F5F5F;line-height:135%'>{confirmation}</h3>";
-                    htmlConfirmations += "<div><br /></div>";
-                }
-
-            }
 
             var replacements = new ListDictionary();
             replacements.Add("{confirmations}", htmlConfirmations);

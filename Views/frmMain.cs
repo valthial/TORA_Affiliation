@@ -61,9 +61,11 @@ namespace TORA_Affiliation.Views
         private void sendTestEmailBtn_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            var mailer = new Mailer();
+            /*var mailer = new Mailer();
             mailer.SendMail("Affiliation Service Test Email"
-                           , "Affiliation Service Test Email Body.");
+                           , "Affiliation Service Test Email Body.");*/
+            var sendError = new MailSender();
+            sendError.SendConfirmMail("Test Mail" + " " + DateTime.Today.ToString("dd/MM/yyyy"));
             MessageBox.Show("Test Email sent");
             Cursor.Current = Cursors.Default;
         }
@@ -71,6 +73,16 @@ namespace TORA_Affiliation.Views
         private void RunManuallyBtn_Click(object sender, EventArgs e)
         {
             //TODO - run manually button
+
+            var creator = new MainCreator();
+            if (creator.Create())
+            {
+                processRunningLbl.Text = "Done";
+            }
+            else
+            {
+                processRunningLbl.Text = "Failed";
+            }
         }
 
         

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TORA_Affiliation.Controllers;
 using TORA_Affiliation.Controllers.Log;
+using TORA_Affiliation.Controllers.Mail;
 using TORA_Affiliation.Interfaces;
 using TORA_Affiliation.Models;
 
@@ -25,6 +26,9 @@ namespace TORA_Affiliation
         {
             _logger.EmptyLine();
             _logger.Info("Affiliation Service Started Running");
+
+            var sendError = new MailSender();
+            sendError.SendConfirmMail("Affiliation Service Started Running");
 
             try
             {
@@ -46,6 +50,9 @@ namespace TORA_Affiliation
                 _logger.Error(ex.Message, ex);
             }
             return true;
+
+
+
         }
 
         private bool FillAffiTransaction()
