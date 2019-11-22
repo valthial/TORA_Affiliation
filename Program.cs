@@ -27,7 +27,7 @@ namespace TORA_Affiliation
             InitializeLogger();
 
             //Check if an instance of the application is already running
-            const string appName = "Tora_E-Commerce";
+            const string appName = "Tora_Affiliation";
             bool createNew;
 
             _mutex = new Mutex(true, appName, out createNew);

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TORA_Affiliation.Controllers;
 using TORA_Affiliation.Controllers.Log;
 using TORA_Affiliation.Controllers.Mail;
@@ -81,8 +79,8 @@ namespace TORA_Affiliation
                         sqlCommand.CommandTimeout = 0;
                         // execute query
                         sqlCommand.ExecuteNonQuery();
-                        _logger.Info("Entries added successfully to E-Commerce_Transactions "
-                                    + "and @TORA_SELFBILLINGS tables. "
+                        _logger.Info("Entries added successfully to Affiliation_Transactions "
+                                   // + "and @TORA_SELFBILLINGS tables. "
                                     + "Aggregation process ended");
                         return true;
                     }

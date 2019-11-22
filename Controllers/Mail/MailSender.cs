@@ -12,7 +12,6 @@ namespace TORA_Affiliation.Controllers.Mail
         {
             _logger = new TraceLogger();
         }
-        //TODO - SendErrorMail function
 
         public void SendErrorMail(string strSboErrorMessage)
         {
@@ -28,16 +27,15 @@ namespace TORA_Affiliation.Controllers.Mail
         }
 
         /// <summary>
-        /// Send an email with confirmation message about Journal Entries.
+        /// Send an email with confirmation message 
         /// </summary>
-        /// <param name="confirmations"></param>
         public void SendConfirmMail(string message)
         {
             var mailer = new Mailer();
             var mailCreator = new ConfirmMailBuilder();
 
             var body = mailCreator.GetMailBody(message);
-            mailer.SendMail($"E-Commerce Journal Entries Creations Service Confirmation", body, true);
+            mailer.SendMail($"Affiliation Service Confirmation", body, true);
 
             _logger.Info("Confirmation E-mail Sent");
         }

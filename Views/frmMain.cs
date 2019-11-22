@@ -65,15 +65,13 @@ namespace TORA_Affiliation.Views
             mailer.SendMail("Affiliation Service Test Email"
                            , "Affiliation Service Test Email Body.");*/
             var sendError = new MailSender();
-            sendError.SendConfirmMail("Test Mail" + " " + DateTime.Today.ToString("dd/MM/yyyy"));
+            sendError.SendErrorMail("Test Mail");
             MessageBox.Show("Test Email sent");
             Cursor.Current = Cursors.Default;
         }
 
         private void RunManuallyBtn_Click(object sender, EventArgs e)
         {
-            //TODO - run manually button
-
             var creator = new MainCreator();
             if (creator.Create())
             {

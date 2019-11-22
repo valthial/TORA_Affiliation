@@ -44,14 +44,6 @@ namespace TORA_Affiliation.Controllers
                              SQLUsername = r.Element("SQLUsername")?.Value,
                              SQLPassword = Crypto.DecryptString(r.Element("SQLPassword")?.Value),
 
-                             // SAP Business One - Credentials
-                             SboDatabaseName = r.Element("SapB1InitialCatalog")?.Value,
-
-                             // Item Codes for E-Commerce Products
-                             SboItemCodePayIn = r.Element("SboItemCodePayIn")?.Value,
-                             SboItemCodePayOut = r.Element("SboItemCodePayOut")?.Value,
-                             SboItemCodeRefund = r.Element("SboItemCodeRefund")?.Value,
-
                              // Email Credentials and configurations
                              SmtpClient = r.Element("emailSmtpClient")?.Value,
                              EmailPort = r.Element("emailPort")?.Value,
@@ -108,23 +100,6 @@ namespace TORA_Affiliation.Controllers
             {
                 elementPassword.Value = Crypto.EncryptString(config.SQLPassword);
             }
-
-            // SBO Credentials
-            //-----------------
-            // Database Name
-            var elementSapB1InitialCatalog = root.Element("SapB1InitialCatalog");
-            if (elementSapB1InitialCatalog != null) elementSapB1InitialCatalog.Value = config.SboDatabaseName;
-            
-            // Item Codes for E-Commerce Products
-            //------------------------------------
-            var elementItemCodeForRsSend = root.Element("SboItemCodePayIn");
-            if (elementItemCodeForRsSend != null) elementItemCodeForRsSend.Value = config.SboItemCodePayIn;
-
-            var elementItemCodeForRsReceive = root.Element("SboItemCodePayOut");
-            if (elementItemCodeForRsReceive != null) elementItemCodeForRsReceive.Value = config.SboItemCodePayOut;
-
-            var elementItemCodeForRsRefund = root.Element("SboItemCodeRefund");
-            if (elementItemCodeForRsRefund != null) elementItemCodeForRsRefund.Value = config.SboItemCodeRefund;
 
             // Email Credentials
             //-------------------
@@ -186,22 +161,9 @@ namespace TORA_Affiliation.Controllers
                 new XElement("SQLPassword", "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdnMEoBtcSU+FItXlzfD99wAAAAACAAAAAAAQZgAAAAEAACAAAAA+Fl+ujCeERQjind7zxKJ0k1mTufwlkF/j8AOOw/rPzwAAAAAOgAAAAAIAACAAAADUgU3XXTlEU7891G83P8piBXRWIzSM4vA1x9QtfP5hHiAAAAB9rOOC0UxgSug3uODI7RKLVg76jFC6fSjc3bwnd/4DrUAAAAC7LD5xJ50s4uM2l6MF7VyJj7EaezoIZ7X/7wynge+3X/ZivVMZm76DVF0vrAAeMbTlUGT2zqOypW6kjyFnFnZJ"),
 
                 new XComment("SBO Configuration"),
-                //TODO - delete ??
-
-           //   new XElement("SapB1DataSource", " "),
-           //   new XElement("SapB1InitialCatalog", " "),
+              
                 new XElement("SapB1DbUsername", " "),
-           //   new XElement("SapB1DbPassword", "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdnMEoBtcSU+FItXlzfD99wAAAAACAAAAAAAQZgAAAAEAACAAAAA+Fl+ujCeERQjind7zxKJ0k1mTufwlkF/j8AOOw/rPzwAAAAAOgAAAAAIAACAAAADUgU3XXTlEU7891G83P8piBXRWIzSM4vA1x9QtfP5hHiAAAAB9rOOC0UxgSug3uODI7RKLVg76jFC6fSjc3bwnd/4DrUAAAAC7LD5xJ50s4uM2l6MF7VyJj7EaezoIZ7X/7wynge+3X/ZivVMZm76DVF0vrAAeMbTlUGT2zqOypW6kjyFnFnZJ"),
-           //   new XElement("SapB1DbType", "dst_MSSQL2014"),
-           //   new XElement("SapB1CompanyUsername", " "),
-           //   new XElement("SapB1CompanyPassword", "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdnMEoBtcSU+FItXlzfD99wAAAAACAAAAAAAQZgAAAAEAACAAAAA+Fl+ujCeERQjind7zxKJ0k1mTufwlkF/j8AOOw/rPzwAAAAAOgAAAAAIAACAAAADUgU3XXTlEU7891G83P8piBXRWIzSM4vA1x9QtfP5hHiAAAAB9rOOC0UxgSug3uODI7RKLVg76jFC6fSjc3bwnd/4DrUAAAAC7LD5xJ50s4uM2l6MF7VyJj7EaezoIZ7X/7wynge+3X/ZivVMZm76DVF0vrAAeMbTlUGT2zqOypW6kjyFnFnZJ"),
-           //   new XElement("SapB1LicenseServer", " "),
-
-            //  new XComment("Item Codes"),
-            //
-            //  new XElement("SboItemCodePayIn", "00001"),
-            //  new XElement("SboItemCodePayOut", "00002"),
-            //  new XElement("SboItemCodeRefund", "00003"),
+          
 
                 new XComment("Email Configuration"),
 

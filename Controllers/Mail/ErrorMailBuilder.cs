@@ -15,12 +15,8 @@ namespace TORA_Affiliation.Controllers.Mail
         /// <summary>
         /// Builds and returns the HTML of the Error Mail
         /// </summary>
-        /// <param name="je"></param>
-        /// <param name="sapb1ErrorMsg"></param>
         /// <param name="AffiliationErrorMessage"></param>
         /// <returns></returns>
-
-        //TODO - Error Mail Body
 
         public string GetMailBody(string AffiliationErrorMessage)
         {

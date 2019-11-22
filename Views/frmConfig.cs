@@ -12,7 +12,6 @@ using TORA_Affiliation.Models;
 
 namespace TORA_Affiliation.Views
 {
-    //TODO - handle comments
     public partial class frmConfig : Form
     {
         public frmConfig()
@@ -32,23 +31,6 @@ namespace TORA_Affiliation.Views
             config.SQLDatabaseName = sqlDatabaseNameTxt.Text;
             config.SQLUsername = sqlUsernameTxt.Text;
             config.SQLPassword = Crypto.ToSecureString(sqlPasswordTxt.Text);
-
-            ////SAP B1 Credentials
-            ////------------------
-            //config.SboServerName = sboServerNameTxt.Text;
-            //config.SboDatabaseName = sboDbNameTxt.Text;
-            //config.SboDatabaseUsername = sboDbUsernameTxt.Text;
-            //config.SboDatabasePassword = Crypto.ToSecureString(sboDbPasswordTxt.Text);
-            //config.SboDatabaseType = sboDbTypeTxt.Text;
-            //config.SboCompanyUsername = sboCompanyUsernameTxt.Text;
-            //config.SboCompanyPassword = Crypto.ToSecureString(sboCompanyPasswordTxt.Text);
-            //config.SboLicenseServer = sboLisenceServerTxt.Text;
-
-            ////Item Codes
-            ////----------
-            //config.SboItemCodePayIn = itemCodePayInTxt.Text;
-            //config.SboItemCodePayOut = itemCodePayOutTxt.Text;
-            //config.SboItemCodeRefund = itemCodeRefundTxt.Text;
 
             //Email Credentials
             //-----------------
@@ -94,23 +76,6 @@ namespace TORA_Affiliation.Views
             sqlDatabaseNameTxt.Text = config.SQLDatabaseName;
             sqlUsernameTxt.Text = config.SQLUsername;
             sqlPasswordTxt.Text = Config.PasswordDefaultText;
-
-            ////SAP B1 Credentials
-            ////------------------
-            //sboServerNameTxt.Text = config.SboServerName;
-            //sboDbNameTxt.Text = config.SboDatabaseName;
-            //sboDbUsernameTxt.Text = config.SboDatabaseUsername;
-            //sboDbPasswordTxt.Text = Config.PasswordDefaultText;
-            //sboDbTypeTxt.Text = config.SboDatabaseType;
-            //sboCompanyUsernameTxt.Text = config.SboCompanyUsername;
-            //sboCompanyPasswordTxt.Text = Config.PasswordDefaultText;
-            //sboLisenceServerTxt.Text = config.SboLicenseServer;
-
-            ////Item Codes
-            ////----------
-            //itemCodePayInTxt.Text = config.SboItemCodePayIn;
-            //itemCodePayOutTxt.Text = config.SboItemCodePayOut;
-            //itemCodeRefundTxt.Text = config.SboItemCodeRefund;
 
             //Email Credentials
             //-----------------
