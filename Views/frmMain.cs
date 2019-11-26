@@ -64,8 +64,8 @@ namespace TORA_Affiliation.Views
             /*var mailer = new Mailer();
             mailer.SendMail("Affiliation Service Test Email"
                            , "Affiliation Service Test Email Body.");*/
-            var sendError = new MailSender();
-            sendError.SendErrorMail("Test Mail");
+            var mail = new MailSender();
+            mail.SendErrorMail("Error");
             MessageBox.Show("Test Email sent");
             Cursor.Current = Cursors.Default;
         }
@@ -73,6 +73,7 @@ namespace TORA_Affiliation.Views
         private void RunManuallyBtn_Click(object sender, EventArgs e)
         {
             var creator = new MainCreator();
+            Cursor.Current = Cursors.WaitCursor;
             if (creator.Create())
             {
                 processRunningLbl.Text = "Done";
@@ -81,6 +82,7 @@ namespace TORA_Affiliation.Views
             {
                 processRunningLbl.Text = "Failed";
             }
+            Cursor.Current = Cursors.Default;
         }
 
         

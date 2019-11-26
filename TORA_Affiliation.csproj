@@ -53,13 +53,11 @@
     <Compile Include="Controllers\Mail\ConfirmMailBuilder.cs" />
     <Compile Include="Controllers\Mail\ErrorMailBuilder.cs" />
     <Compile Include="Controllers\Mail\MailSender.cs" />
-    <Compile Include="Interfaces\ICreator.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Controllers\Log\TraceLogger.cs" />
     <Compile Include="Controllers\Mail\Mailer.cs" />
     <Compile Include="Interfaces\IMailer.cs" />
     <Compile Include="MainCreator.cs" />
-    <Compile Include="Models\AffiTransaction.cs" />
     <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

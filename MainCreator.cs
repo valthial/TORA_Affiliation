@@ -10,7 +10,7 @@ using TORA_Affiliation.Models;
 
 namespace TORA_Affiliation
 {
-    class MainCreator : ICreator
+    class MainCreator 
     {
         private ILogger _logger;
 
@@ -25,23 +25,28 @@ namespace TORA_Affiliation
             _logger.EmptyLine();
             _logger.Info("Affiliation Service Started Running");
 
-            var mail = new MailSender();
-            mail.SendConfirmMail("Affiliation Service Started Running");
+            var sendError = new MailSender();
+            sendError.SendConfirmMail($"Affiliation Service Started Running \r\n {DateTime.Now}");
 
             try
             {
-                if (FillAffiTransaction())
+                if (TransactionCheck())
                 {
-                    var transactions = GetAffiTransactions();
-                    if (transactions.Any())
+                    if (FillAffiTransaction())
                     {
                         _logger.Info("Affiliation Service Terminating. Bye-Bye");
                     }
-                    else
-                    {
-                        _logger.Info("No Transactions to Add. My job is done here. Bye-Bye");
-                    }
+                    
                 }
+                else
+                {
+                    _logger.Info("No transactions found Application Terminate");
+                    var sendInfo = new MailSender();
+                    sendInfo.SendConfirmMail("No transactions found Application Terminate");
+                    return true;
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -85,8 +90,7 @@ namespace TORA_Affiliation
                                     + "Aggregation process ended");
 
                         var mail = new MailSender();
-                        mail.SendConfirmMail("Entries added successfully to Affiliation_Transactions "
-                                                + "Aggregation process ended");
+                        mail.SendConfirmMail("Entries added successfully to Affiliation_Transactions Aggregation process ended");
                         return true;
                     }
                 }
@@ -94,8 +98,7 @@ namespace TORA_Affiliation
                 {
                     _logger.Error(ex.Message, ex);
                     var mail = new MailSender();
-                    mail.SendErrorMail("Affiliation_Transactions failed to add entries"
-                                            + "Aggregation process ended");
+                    mail.SendErrorMail($"Affiliation_Transactions failed to add entries \r\n Aggregation process ended");
                     return false;
                 }
                 finally
@@ -105,66 +108,46 @@ namespace TORA_Affiliation
             }
 
         }
-        public List<AffiTransaction> GetAffiTransactions()
+
+        private bool TransactionCheck()
         {
             var config = Config.ReadConfig();
             var connectionsStr = $"Data Source = {config.SQLServerName};" +
                                  $"Initial Catalog = {config.SQLDatabaseName};" +
                                  $"User ID = {config.SQLUsername};" +
                                  $"Password = {Crypto.ToInsecureString(config.SQLPassword)}";
-            var query = Queries.Queries.GetAffiTransations;
-            var AffiTransactions = new List<AffiTransaction>();
+            var query = string.Format(Queries.Queries.TransactionCheck, config.SQLDatabaseName);
 
-            using (var connection = new SqlConnection(connectionsStr))
+            var connection = new SqlConnection(connectionsStr);
+
+            int result = 0;
+
+            try
             {
-                try
+                using(var command = new SqlCommand(query, connection))
                 {
-
-                    using (var command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
-
-                        using (var reader = command.ExecuteReader())
-                        {
-
-                            while (reader.Read())
-                            {
-                                var trans = new AffiTransaction();
-                                trans.Id = Convert.ToInt32(reader["ID"]);
-                                trans.TransactionTypeId = reader["TransactionTypeID"].ToString()[0];
-                                var transDate = reader["TransactionDate"];
-
-                                if (transDate != DBNull.Value)
-                                {
-                                    trans.TransactionDate = Convert.ToDateTime(reader["TransactionDate"]);
-                                }
-
-                                trans.InvoicingId = reader["InvoicingID"].ToString();
-                                trans.ProductId = reader["ProductID"].ToString();
-                                trans.Quantity = Convert.ToInt32(reader["Quantity"]);
-                                trans.PaymentMethod = reader["PaymentMethod"].ToString()[0];
-                                trans.TransactionAmount = Convert.ToDecimal(reader["TransactionAmount"]);
-                                trans.CommissionAmount = Convert.ToDecimal(reader["CommissionAmount"]);
-                                trans.Count = Convert.ToInt32(reader["Count"]);
-
-                                AffiTransactions.Add(trans);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex.Message, ex);
-                }
-                finally
-                {
-                    connection.Close();
+                    connection.Open();
+                    command.CommandTimeout = 0; 
+                    result = (Int32)command.ExecuteScalar();
                 }
 
+                if(result <= 0)
+                {
+                    return false;
+                }
+                else { return true; }
+            }
+            catch(Exception e)
+            {
+                _logger.Error(e.Message, e);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
             }
 
-            return AffiTransactions;
-
+            
         }
     }
 }

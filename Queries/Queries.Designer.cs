@@ -82,21 +82,13 @@ namespace TORA_Affiliation.Queries {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select ID
-        ///     , TransactionTypeID
-        ///     , TransactionDate
-        ///     , InvoicingID
-        ///     , ProductID
-        ///     , Quantity
-        ///     , PaymentMethod
-        ///     , TransactionAmount
-        ///     , CommissionAmount
-        ///     , [Count]
-        ///from AffiTransactions.
+        ///   Looks up a localized string similar to SELECT COUNT(*)
+        ///FROM [{0}].[dbo].[CMS_Transactions]
+        ///WHERE [TransactionCategoryID] = &apos;VP&apos; AND [SourceID] = &apos;BE&apos; AND [IsRead] = &apos;N&apos;.
         /// </summary>
-        internal static string GetAffiTransations {
+        internal static string TransactionCheck {
             get {
-                return ResourceManager.GetString("GetAffiTransations", resourceCulture);
+                return ResourceManager.GetString("TransactionCheck", resourceCulture);
             }
         }
     }

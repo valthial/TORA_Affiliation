@@ -47,7 +47,7 @@ namespace TORA_Affiliation.Controllers.Mail
             var now = DateTime.Now;
             replacements.Add("{Date}", now.ToString("G"));
 
-            var message = md.CreateMailMessage(Config.ReadConfig().EmailTo, null, mailTemplate, new System.Web.UI.Control());
+            var message = md.CreateMailMessage(Config.ReadConfig().EmailTo, replacements, mailTemplate, new System.Web.UI.Control());
 
             return message.Body;
         }

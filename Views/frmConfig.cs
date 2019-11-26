@@ -32,6 +32,9 @@ namespace TORA_Affiliation.Views
             config.SQLUsername = sqlUsernameTxt.Text;
             config.SQLPassword = Crypto.ToSecureString(sqlPasswordTxt.Text);
 
+            //Sbo Credentials
+            config.SboDatabaseName = sapDatabaseNameTxt.Text;
+
             //Email Credentials
             //-----------------
             config.SmtpClient = smtpClientTxt.Text;
@@ -76,6 +79,10 @@ namespace TORA_Affiliation.Views
             sqlDatabaseNameTxt.Text = config.SQLDatabaseName;
             sqlUsernameTxt.Text = config.SQLUsername;
             sqlPasswordTxt.Text = Config.PasswordDefaultText;
+
+            //Sbo Credentials
+            //---------------
+            sapDatabaseNameTxt.Text = config.SboDatabaseName;
 
             //Email Credentials
             //-----------------

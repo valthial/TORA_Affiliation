@@ -44,6 +44,8 @@ namespace TORA_Affiliation.Controllers
                              SQLUsername = r.Element("SQLUsername")?.Value,
                              SQLPassword = Crypto.DecryptString(r.Element("SQLPassword")?.Value),
 
+                             SboDatabaseName = r.Element("SboDatabaseName")?.Value,
+
                              // Email Credentials and configurations
                              SmtpClient = r.Element("emailSmtpClient")?.Value,
                              EmailPort = r.Element("emailPort")?.Value,
@@ -100,6 +102,12 @@ namespace TORA_Affiliation.Controllers
             {
                 elementPassword.Value = Crypto.EncryptString(config.SQLPassword);
             }
+
+            //Sbo Database
+            //------------
+            // Sbo Database Name
+            var elementSboDatabaseName = root.Element("SboDatabaseName");
+            if (elementSboDatabaseName != null) elementSboDatabaseName.Value = config.SboDatabaseName;
 
             // Email Credentials
             //-------------------
@@ -162,7 +170,7 @@ namespace TORA_Affiliation.Controllers
 
                 new XComment("SBO Configuration"),
               
-                new XElement("SapB1DbUsername", " "),
+                new XElement("SboDatabaseName", " "),
           
 
                 new XComment("Email Configuration"),

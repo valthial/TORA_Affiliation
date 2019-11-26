@@ -151,20 +151,22 @@ select ID
                          end )
      , TransactionDate = ( case when TransactionTypeID = 'D' then ClosingTransactionDate else CancelTransactionDate end )
      , ProductID
+     ,CompanyID
      , PaymentMethod
      , TransactionTypeID
      , TransactionAmount
      , CommissionAmount
      , Quantity
-     , CmsId = ( select U_ItemCode_SAP COLLATE SQL_Latin1_General_CP850_CI_AS
+     , CmsId = ( select ItemCode COLLATE SQL_Latin1_General_CP850_CI_AS
                  from [{0}].[dbo].[OITM]
-                 where U_ORA_CMSSAPITEMS COLLATE SQL_Latin1_General_CP850_CI_AS = ProductID )
+                 where U_TORA_TIC_CmsToraCode COLLATE SQL_Latin1_General_CP850_CI_AS = ProductID )
 
 into #PreAggregationAffi
 from CMS_Transactions
 where IsRead != 'Y'
       and TransactionCategoryID = 'VP'
-      and (SourceID = 'TW' OR SourceID = 'BE')
+      and SourceID = 'BE'
+      and CompanyID = 'TW'
 
 
 -- Insert aggregated entries to [Affiliation] table
@@ -232,6 +234,37 @@ group by SelfBillingID
 
        , TransactionTypeID
 
+
+insert into Affiliation_Transactions
+   ( InvoicingID
+   , TransactionDate
+   , ProductID
+   , PaymentMethod
+   , CompanyID
+   , TransactionTypeID
+   , TransactionAmount
+   , CommissionAmount
+   , [Count]
+   , Quantity
+   )
+select InvoicingID
+     , TransactionDate
+     , CmsId
+     , PaymentMethod
+     , CompanyID
+     , TransactionTypeID
+     , TransactionAmount = SUM(TransactionAmount)
+     , CommissionAmount = SUM(CommissionAmount)
+     , [Count] = COUNT(*)
+     , Quantity = SUM(Quantity)
+from #PreAggregationAffi
+group by TransactionTypeID
+,CompanyID
+, TransactionDate
+, InvoicingID
+, CmsId
+, PaymentMethod
+
 -- Update the CMS_Transactions table to indicate that the lines have been added to [Affiliation]
 UPDATE CMS_Transactions
 set IsRead = 'Y'
@@ -242,17 +275,9 @@ from #PreAggregationAffi
 
 COMMIT TRANSACTION @TranName;</value>
   </data>
-  <data name="GetAffiTransations" xml:space="preserve">
-    <value>select ID
-     , TransactionTypeID
-     , TransactionDate
-     , InvoicingID
-     , ProductID
-     , Quantity
-     , PaymentMethod
-     , TransactionAmount
-     , CommissionAmount
-     , [Count]
-from AffiTransactions</value>
+  <data name="TransactionCheck" xml:space="preserve">
+    <value>SELECT COUNT(*)
+FROM [{0}].[dbo].[CMS_Transactions]
+WHERE [TransactionCategoryID] = 'VP' AND [SourceID] = 'BE' AND [IsRead] = 'N'</value>
   </data>
 </root>
