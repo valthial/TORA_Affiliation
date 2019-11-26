@@ -62,22 +62,22 @@ namespace TORA_Affiliation.Queries {
         
         /// <summary>
         ///   Looks up a localized string similar to SET XACT_ABORT ON
-        ///DECLARE @TranName VARCHAR(50) = &apos;ECommerceServiceAggration&apos;;
+        ///DECLARE @TranName VARCHAR(50) = &apos;AffiliationServiceAggration&apos;;
         ///
-        ///-- IF PreAggregationE table exists, delete it
-        ///IF OBJECT_ID(&apos;tempdb..#PreAggregationE&apos;) IS NOT NULL DROP TABLE #PreAggregationE
+        ///-- IF PreAggregationAffi table exists, delete it
+        ///IF OBJECT_ID(&apos;tempdb..#PreAggregationAffi&apos;) IS NOT NULL DROP TABLE #PreAggregationAffi
         ///
         ///BEGIN TRANSACTION @TranName; 
         ///
-        ///-- Fill the PreAggregationE table while adding InvoicingID and SelfBillingID
+        ///-- Fill the PreAggregationAffi table while adding InvoicingID and SelfBillingID
         ///select ID
         ///     , InvoicingID = ( case when PaymentMethod = 2
         ///                            then ( select U_TORA_TIC_RetailBp COLLATE SQL_Latin1_General_CP850_CI_AS
-        ///                       [rest of string was truncated]&quot;;.
+        ///         [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string AddEntriesToAffiTransactions {
+        internal static string AddEntriesToAffiliation {
             get {
-                return ResourceManager.GetString("AddEntriesToAffiTransactions", resourceCulture);
+                return ResourceManager.GetString("AddEntriesToAffiliation", resourceCulture);
             }
         }
         

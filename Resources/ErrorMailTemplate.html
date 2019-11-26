@@ -449,7 +449,7 @@
                                                             <tr>
                                                                 <td align="center" valign="top" class="textContent">
                                                                     <div><br /></div>
-                                                                    <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;">Affilition Service error: {AffiliationErrorMessage}</div>
+                                                                    <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;">Affiliation Service Confirmation</h1>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -484,14 +484,8 @@
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td valign="top" class="textContent">
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Reference Date: {RefDate}</h2>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Tax Date: {TaxDate}</h2>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Due Date: {DueDate}</h2>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Transaction Code: {TransCode}</h2>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Ref1: {Ref1}</h2>
-                                                                                <div><br /></div>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">CMS Item: {CmsItem}</h2>
-                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Transaction Type: {TransType}</h2>
+                                                                                <h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Date: {Date}</h2>
+                                                                                <!--<h2 mc:edit="header" style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Time: {Time}</h2>-->
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -526,43 +520,11 @@
                                                         <!-- CONTENT TABLE // -->
                                                         <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                             <tr>
-                                                                <td align="left" valign="top" class="flexibleContainerBox">
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
+                                                                <td align="center" valign="top" class="flexibleContainerBox">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="700" style="max-width: 100%;">
                                                                         <tr>
-                                                                            <td align="left" class="textContent">
-                                                                                <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Acct/BP Code</h3>
-                                                                                {AccountColumn}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                                <td align="left" valign="top" class="flexibleContainerBox">
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
-                                                                        <tr>
-                                                                            <td align="left" class="textContent">
-                                                                                <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Control Account</h3>
-                                                                                {ControlAccountColumn}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-
-                                                                <td align="right" valign="top" class="flexibleContainerBox">
-                                                                    <table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
-                                                                        <tr>
-                                                                            <td align="left" class="textContent">
-                                                                                <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Credit</h3>
-                                                                                {CreditColumn}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                                <td align="right" valign="top" class="flexibleContainerBox">
-                                                                    <table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
-                                                                        <tr>
-                                                                            <td align="left" class="textContent">
-                                                                                <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Debit</h3>
-                                                                                {DebitColumn}
+                                                                            <td align="center" class="textContent">
+                                                                                {ErrorMsg}
                                                                             </td>
                                                                         </tr>
                                                                     </table>

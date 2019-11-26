@@ -25,8 +25,8 @@ namespace TORA_Affiliation
             _logger.EmptyLine();
             _logger.Info("Affiliation Service Started Running");
 
-            var sendError = new MailSender();
-            sendError.SendConfirmMail("Affiliation Service Started Running");
+            var mail = new MailSender();
+            mail.SendConfirmMail("Affiliation Service Started Running");
 
             try
             {
@@ -58,13 +58,14 @@ namespace TORA_Affiliation
             _logger.Info("Getting Data from CMS_Transactions "
                      + "to Aggregate to AffiTransactions");
 
+
             var config = Config.ReadConfig();
             var connectionsStr = $"Data Source = {config.SQLServerName};" +
                                  $"Initial Catalog = {config.SQLDatabaseName};" +
                                  $"User ID= {config.SQLUsername};" +
                                  $"Password= {Crypto.ToInsecureString(config.SQLPassword)}";
 
-            var query = string.Format(Queries.Queries.AddEntriesToAffiTransactions
+            var query = string.Format(Queries.Queries.AddEntriesToAffiliation
                                   , config.SboDatabaseName);
 
             using (var sqlConnection = new SqlConnection(connectionsStr))
@@ -82,12 +83,19 @@ namespace TORA_Affiliation
                         _logger.Info("Entries added successfully to Affiliation_Transactions "
                                    // + "and @TORA_SELFBILLINGS tables. "
                                     + "Aggregation process ended");
+
+                        var mail = new MailSender();
+                        mail.SendConfirmMail("Entries added successfully to Affiliation_Transactions "
+                                                + "Aggregation process ended");
                         return true;
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.Error(ex.Message, ex);
+                    var mail = new MailSender();
+                    mail.SendErrorMail("Affiliation_Transactions failed to add entries"
+                                            + "Aggregation process ended");
                     return false;
                 }
                 finally

@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddEntriesToAffiTransactions" xml:space="preserve">
+  <data name="AddEntriesToAffiliation" xml:space="preserve">
     <value>SET XACT_ABORT ON
-DECLARE @TranName VARCHAR(50) = 'ECommerceServiceAggration';
+DECLARE @TranName VARCHAR(50) = 'AffiliationServiceAggration';
 
--- IF PreAggregationE table exists, delete it
-IF OBJECT_ID('tempdb..#PreAggregationE') IS NOT NULL DROP TABLE #PreAggregationE
+-- IF PreAggregationAffi table exists, delete it
+IF OBJECT_ID('tempdb..#PreAggregationAffi') IS NOT NULL DROP TABLE #PreAggregationAffi
 
 BEGIN TRANSACTION @TranName; 
 
--- Fill the PreAggregationE table while adding InvoicingID and SelfBillingID
+-- Fill the PreAggregationAffi table while adding InvoicingID and SelfBillingID
 select ID
      , InvoicingID = ( case when PaymentMethod = 2
                             then ( select U_TORA_TIC_RetailBp COLLATE SQL_Latin1_General_CP850_CI_AS
@@ -158,7 +158,7 @@ select ID
      , Quantity
      , CmsId = ( select U_ItemCode_SAP COLLATE SQL_Latin1_General_CP850_CI_AS
                  from [{0}].[dbo].[OITM]
-                 where U_ORA_CMSSAPITEMS COLLATE SQL_Latin1_General_CP850_CI_AS = Code )
+                 where U_ORA_CMSSAPITEMS COLLATE SQL_Latin1_General_CP850_CI_AS = ProductID )
 
 into #PreAggregationAffi
 from CMS_Transactions
@@ -167,41 +167,78 @@ where IsRead != 'Y'
       and (SourceID = 'TW' OR SourceID = 'BE')
 
 
--- Insert aggregated entries to [AffiTransactions] table
-insert into AffiTransactions
-   ( InvoicingID
-   , TransactionDate
-   , ProductID
-   , PaymentMethod
-   , TransactionTypeID
-   , TransactionAmount
-   , CommissionAmount
-   , [Count]
-   , Quantity
+-- Insert aggregated entries to [Affiliation] table
+insert into [{0}].[dbo].[@TORA_SELFBILLINGS]
+
+   ( U_ItemID
+
+   , U_Value
+
+   , U_CustomerID
+
+   , U_TransactionDate
+
+   , U_Quantity
+
+   , U_TransactionType
+
+   , U_CardOrBill
+
+   , U_RecordSoure
+
+   , U_GlAccount
+
+   , U_DiscountPercent
+
+   , U_Invoiced
+
    )
-select InvoicingID
-     , TransactionDate
-     , ProductID
-     , PaymentMethod
-     , TransactionTypeID
-     , TransactionAmount = SUM(TransactionAmount)
-     , CommissionAmount = SUM(CommissionAmount)
-     , [Count] = COUNT(*)
-     , Quantity = SUM(Quantity)
-from #PreAggregationVP
-group by InvoicingID
+
+select U_ItemID = ( select U_CMS_Id COLLATE SQL_Latin1_General_CP850_CI_AS
+
+                 from [{0}].[dbo].[OITM]
+
+                 where ItemCode = CmsId )
+
+     , U_Value = SUM(TransactionAmount)
+
+     , U_CustomerID = SelfBillingID
+
+     , U_TransactionDate = CONVERT(NVARCHAR(50), TransactionDate, 12)
+
+     , U_Quantity = SUM(Quantity)
+
+     , U_TransactionType = TransactionTypeID
+
+     , U_CardOrBill = 'BL'
+
+     , U_RecordSoure = 'CMS'
+
+     , U_GlAccount = NULL
+
+     , U_DiscountPercent = NULL
+
+     , U_Invoiced = NULL
+
+from #PreAggregationAffi
+
+group by SelfBillingID
+
        , TransactionDate
-       , ProductID
+
+       , CmsId
+
        , PaymentMethod
+
        , TransactionTypeID
 
--- Update the CMS_Transactions table to indicate that the lines have been added to [AffiTransactions]
+-- Update the CMS_Transactions table to indicate that the lines have been added to [Affiliation]
 UPDATE CMS_Transactions
 set IsRead = 'Y'
   , ReadDate = CURRENT_TIMESTAMP
   , ReadTime = CURRENT_TIMESTAMP
-from #PreAggregationVP
-     JOIN CMS_Transactions on CMS_Transactions.ID = #PreAggregationVP.ID
+from #PreAggregationAffi
+     JOIN CMS_Transactions on CMS_Transactions.ID = #PreAggregationAffi.ID
 
 COMMIT TRANSACTION @TranName;</value>
   </data>

@@ -35,6 +35,17 @@ namespace TORA_Affiliation.Controllers.Mail
             md.From = Config.ReadConfig().EmailAddressFrom;
             md.IsBodyHtml = true;
 
+            string htmlErrors = string.Empty;
+
+            htmlErrors +=
+                $"<h3 style='text - align:left; font - family:Helvetica,Arial,sans - serif; font - size:15px; margin - bottom:0; color:#5F5F5F;line-height:135%'>{AffiliationErrorMessage}</h3>";
+            htmlErrors += "<div><br /></div>";
+
+
+            var replacements = new ListDictionary();
+            replacements.Add("{ErrorMsg}", htmlErrors);
+            var now = DateTime.Now;
+            replacements.Add("{Date}", now.ToString("G"));
 
             var message = md.CreateMailMessage(Config.ReadConfig().EmailTo, null, mailTemplate, new System.Web.UI.Control());
 

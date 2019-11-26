@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfig));
             this.restoreToDefaultBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.applyBtn = new System.Windows.Forms.Button();
@@ -398,6 +399,7 @@
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.applyBtn);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConfig";
             this.Text = "frmConfig";
             this.EMAILTab.ResumeLayout(false);

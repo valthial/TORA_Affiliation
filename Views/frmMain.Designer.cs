@@ -111,6 +111,7 @@
             this.Controls.Add(this.testSqlConnBtn);
             this.Controls.Add(this.RunManuallyBtn);
             this.Controls.Add(this.SettingsBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "frmMain";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
