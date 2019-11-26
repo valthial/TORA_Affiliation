@@ -113,10 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ConfirmMailTemplate.html" />
-    <Content Include="Resources\Affiliation_icon.ico" />
     <EmbeddedResource Include="Resources\ErrorMailTemplate.html" />
     <Content Include="Resources\main-logo.png" />
-    <None Include="Resources\main-logo1.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
