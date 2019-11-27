@@ -60,8 +60,8 @@ namespace TORA_Affiliation
 
         private bool FillAffiTransaction()
         {
-            _logger.Info("Getting Data from CMS_Transactions "
-                     + "to Aggregate to AffiTransactions");
+            _logger.Info("Getting Data from CMS_Transactions " + 
+                "  " + "to Aggregate to AffiTransactions");
 
 
             var config = Config.ReadConfig();
@@ -86,11 +86,10 @@ namespace TORA_Affiliation
                         // execute query
                         sqlCommand.ExecuteNonQuery();
                         _logger.Info("Entries added successfully to Affiliation_Transactions "
-                                   // + "and @TORA_SELFBILLINGS tables. "
-                                    + "Aggregation process ended");
+                                    + "  " + "Aggregation process ended");
 
                         var mail = new MailSender();
-                        mail.SendConfirmMail("Entries added successfully to Affiliation_Transactions Aggregation process ended");
+                        mail.SendConfirmMail("Affiliation Transactions Were Successfully Added To Affiliation Table \r\n Aggregation process ended");
                         return true;
                     }
                 }
@@ -98,7 +97,7 @@ namespace TORA_Affiliation
                 {
                     _logger.Error(ex.Message, ex);
                     var mail = new MailSender();
-                    mail.SendErrorMail($"Affiliation_Transactions failed to add entries \r\n Aggregation process ended");
+                    mail.SendErrorMail($"Affiliation Transactions Failed To Be Added To Affiliation Table \r\n Aggregation process ended");
                     return false;
                 }
                 finally
