@@ -114,6 +114,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ConfirmMailTemplate.html" />
     <EmbeddedResource Include="Resources\ErrorMailTemplate.html" />
+    <Content Include="Resources\affiliation_icon.ico" />
     <Content Include="Resources\main-logo.png" />
   </ItemGroup>
   <ItemGroup />
