@@ -65,7 +65,7 @@ namespace TORA_Affiliation.Views
             mailer.SendMail("Affiliation Service Test Email"
                            , "Affiliation Service Test Email Body.");*/
             var mail = new MailSender();
-            mail.SendErrorMail("Error");
+            mail.SendConfirmMail("Test Mail Successfull");
             MessageBox.Show("Test Email sent");
             Cursor.Current = Cursors.Default;
         }
@@ -74,6 +74,7 @@ namespace TORA_Affiliation.Views
         {
             var creator = new MainCreator();
             Cursor.Current = Cursors.WaitCursor;
+
             if (creator.Create())
             {
                 processRunningLbl.Text = "Done";
@@ -85,6 +86,6 @@ namespace TORA_Affiliation.Views
             Cursor.Current = Cursors.Default;
         }
 
-        
+
     }
 }

@@ -7,7 +7,7 @@
     <ProjectGuid>{1CCD4726-7F16-494B-A6A1-21D79F2893EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TORA_Affiliation</RootNamespace>
-    <AssemblyName>TORA_Affiliation</AssemblyName>
+    <AssemblyName>OPAP_Affiliation</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>affiliation_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -114,6 +117,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ConfirmMailTemplate.html" />
     <EmbeddedResource Include="Resources\ErrorMailTemplate.html" />
+    <Content Include="affiliation_icon.ico" />
     <Content Include="Resources\affiliation_icon.ico" />
     <Content Include="Resources\main-logo.png" />
   </ItemGroup>

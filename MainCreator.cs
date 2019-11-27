@@ -26,7 +26,7 @@ namespace TORA_Affiliation
             _logger.Info("Affiliation Service Started Running");
 
             var sendError = new MailSender();
-            sendError.SendConfirmMail($"Affiliation Service Started Running \r\n {DateTime.Now}");
+            sendError.SendConfirmMail($"Affiliation Service Started Running {DateTime.Now}");
 
             try
             {
@@ -89,7 +89,7 @@ namespace TORA_Affiliation
                                     + "  " + "Aggregation process ended");
 
                         var mail = new MailSender();
-                        mail.SendConfirmMail("Affiliation Transactions Were Successfully Added To Affiliation Table \r\n Aggregation process ended");
+                        mail.SendConfirmMail("Affiliation Transactions Were Successfully Added To Affiliation Table. Aggregation process ended");
                         return true;
                     }
                 }
@@ -97,7 +97,7 @@ namespace TORA_Affiliation
                 {
                     _logger.Error(ex.Message, ex);
                     var mail = new MailSender();
-                    mail.SendErrorMail($"Affiliation Transactions Failed To Be Added To Affiliation Table \r\n Aggregation process ended");
+                    mail.SendErrorMail($"Affiliation Transactions Failed To Be Added To Affiliation Table. Aggregation process ended");
                     return false;
                 }
                 finally
