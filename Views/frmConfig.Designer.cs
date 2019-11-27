@@ -402,7 +402,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmConfig";
+            this.Text = "OPAP_Affiliation Settings";
             this.EMAILTab.ResumeLayout(false);
             this.EMAILTab.PerformLayout();
             this.SQLTab.ResumeLayout(false);
